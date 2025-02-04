@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chamado de Garçons</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .mesa { margin: 20px; }
+    button { padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Chamar Garçom</h1>
+  <div id="mesas"></div>
+  
+  <script>
+    const numMesas = 20; // Número de mesas no restaurante
+    const url = 'URL_DA_API'; // Substitua pela URL da API do Google Apps Script
+
+    // Cria botões para cada mesa
+    for (let i = 1; i <= numMesas; i++) {
+      const mesaDiv = document.createElement('div');
+      mesaDiv.className = 'mesa';
+      mesaDiv.innerHTML = `<span>Mesa ${i}</span> <button onclick="chamarGarcom(${i})">Chamar Garçom</button>`;
+      document.getElementById('mesas').appendChild(mesaDiv);
+    }
+
+    // Função para chamar o garçom
+    function chamarGarcom(mesa) {
+      fetch(`${url}?action=add&mesa=${mesa}`)
+        .then(response => response.text())
+        .then(data => alert(data));
+    }
+  </script>
+</body>
+</html>
